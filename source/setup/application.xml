@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<application>
+
+	<definition>
+		<idname>innocoder-debugger</idname>
+		<release>
+			<version>1.0</version>
+			<date>2008/12/15</date>
+			<changesfile>CHANGES</changesfile>
+		</release>
+		<description>Innocoder debugger</description>
+		<category>development</category>
+		<iconfile>application.png</iconfile>
+		<dependencies>
+			<dependency>innomatic[5.0]</dependency>
+		</dependencies>
+		<options>
+			<!-- <option></option> -->
+		</options>
+		<legal>
+			<author>
+				<name>Innoteam</name>
+				<email>info@innoteam.it</email>
+				<web>http://www.innomatic.org</web>
+			</author>
+			<copyright>Copyright (C) 2008-2009 Innoteam</copyright>
+			<license>MPL</license>
+			<licensefile>LICENSE</licensefile>
+		</legal>
+		<support>
+			<supportemail>support@innomatic.org</supportemail>
+			<bugsemail>bugs@innomatic.org</bugsemail>
+			<maintainer>
+				<name>Alex Pagnoni</name>
+				<email>alex.pagnoni@innoteam.it</email>
+			</maintainer>
+		</support>
+	</definition>
+
+	<components>
+
+		<class name="innocoder/debugger/InnocoderInstanceDebugger.php" />
+
+		<catalog name="innocoder-debugger" />
+
+		<rootgroup name="innocoder" catalog="innocoder-debugger::misc" />
+
+		<rootpanel name="innocoder-debugger"
+			file="innocoder-debugger.php" category="innocoder" themeicon="core"
+			themeicontype="apps" catalog="innocoder-debugger::misc" />
+
+		<helpnode name="innocoder-debugger" file="innocoder-debugger" />
+
+	</components>
+</application>
