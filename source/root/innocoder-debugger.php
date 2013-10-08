@@ -114,7 +114,7 @@ $gPass_disp->addEvent('cleanrootwebserviceslog', 'pass_cleanrootwebserviceslog')
 $gPass_disp->addEvent('cleanphplog', 'pass_cleanphplog');
 $gPass_disp->Dispatch();
 $innomatic = InnomaticContainer::instance('innomaticcontainer');
-$gToolbars = array(new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array)));
+$gToolbars = array(new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array, 'toolbar' => 'true')));
 // Main dispatcher
 //
 $gMain_disp = new WuiDispatcher('view');
@@ -357,7 +357,7 @@ function main_processes ($eventData)
     }
     $xml_def .= '</children></table>';
     $gToolbars_array['debugger'] = array('eraseall' => array('label' => $gLocale->getStr('eraseall.button') , 'themeimage' => 'edittrash' , 'needconfirm' => 'true' , 'horiz' => 'true' , 'confirmmessage' => $gLocale->getStr('eraseall.confirm') , 'action' => WuiEventsCall::buildEventsCallString('', array(array('view' , 'processes' , '') , array('action' , 'eraseallpids' , '')))));
-    $gToolbars[] = new WuiInnomaticToolBar('debugger', array('toolbars' => $gToolbars_array));
+    $gToolbars[] = new WuiInnomaticToolBar('debugger', array('toolbars' => $gToolbars_array, 'toolbar' => 'true'));
     $gPage_content = new WuiXml('page', array('definition' => $xml_def));
 }
 function main_semaphores ($eventData)
@@ -396,7 +396,7 @@ function main_semaphores ($eventData)
     }
     $xml_def .= '</children></table>';
     $gToolbars_array['semaphores'] = array('eraseall' => array('label' => $gLocale->getStr('eraseall_sem.button') , 'themeimage' => 'edittrash' , 'needconfirm' => 'true' , 'horiz' => 'true' , 'confirmmessage' => $gLocale->getStr('eraseall_sem.confirm') , 'action' => WuiEventsCall::buildEventsCallString('', array(array('view' , 'semaphores' , '') , array('action' , 'eraseallsemaphores' , '')))));
-    $gToolbars[] = new WuiInnomaticToolBar('semaphores', array('toolbars' => $gToolbars_array));
+    $gToolbars[] = new WuiInnomaticToolBar('semaphores', array('toolbars' => $gToolbars_array, 'toolbar' => 'true'));
     $gPage_content = new WuiXml('page', array('definition' => $xml_def));
 }
 function debugger_tab_action_builder ($tab)
@@ -624,7 +624,7 @@ function main_showrootlog ($eventData)
         $cleanlog_action->addEvent(new WuiEvent('view', 'showrootlog', ''));
         $cleanlog_action->addEvent(new WuiEvent('action', 'cleanrootlog', ''));
         $gToolbars_array['cleanlog'] = array('main' => array('label' => $gLocale->getStr('cleanlog_button') , 'themeimage' => 'editdelete' , 'horiz' => 'true' , 'action' => $cleanlog_action->getEventsCallString()));
-        $gToolbars[] = new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array));
+        $gToolbars[] = new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array, 'toolbar' => 'true'));
         if (file_exists(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/innomatic.log')) {
             $log_content = file_get_contents(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/innomatic.log');
         }
@@ -638,7 +638,6 @@ function main_showrootwebserviceslog ($eventData)
     $gPage_content = new WuiVertGroup('vgroup');
     $log_content = '';
     if (file_exists(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/webservices.log')) {
-        $log_toolbar = new WuiToolBar('logbar');
         $cleanlog_action = new WuiEventsCall();
         $cleanlog_action->addEvent(new WuiEvent('view', 'showrootwebserviceslog', ''));
         $cleanlog_action->addEvent(new WuiEvent('action', 'cleanrootwebserviceslog', ''));
@@ -657,12 +656,11 @@ function main_showrootdalog ($eventData)
     $gPage_content = new WuiVertGroup('vgroup');
     $log_content = '';
     if (file_exists(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/innomatic_root_db.log')) {
-        $log_toolbar = new WuiToolBar('logbar');
         $cleanlog_action = new WuiEventsCall();
         $cleanlog_action->addEvent(new WuiEvent('view', 'showrootdalog', ''));
         $cleanlog_action->addEvent(new WuiEvent('action', 'cleanrootdalog', ''));
         $gToolbars_array['cleanlog'] = array('main' => array('label' => $gLocale->getStr('cleanlog_button') , 'themeimage' => 'editdelete' , 'horiz' => 'true' , 'action' => $cleanlog_action->getEventsCallString()));
-        $gToolbars[] = new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array));
+        $gToolbars[] = new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array, 'toolbar' => 'true'));
         if (file_Exists(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/innomatic_root_db.log')) {
             $log_content = file_get_contents(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/innomatic_root_db.log');
         }
@@ -676,12 +674,11 @@ function main_showphplog ($eventData)
     $gPage_content = new WuiVertGroup('vgroup');
     $log_content = '';
     if (file_exists(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/php.log')) {
-        $log_toolbar = new WuiToolBar('logbar');
         $cleanlog_action = new WuiEventsCall();
         $cleanlog_action->addEvent(new WuiEvent('view', 'showphplog', ''));
         $cleanlog_action->addEvent(new WuiEvent('action', 'cleanphplog', ''));
         $gToolbars_array['cleanlog'] = array('main' => array('label' => $gLocale->getStr('cleanlog_button') , 'themeimage' => 'editdelete' , 'horiz' => 'true' , 'action' => $cleanlog_action->getEventsCallString()));
-        $gToolbars[] = new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array));
+        $gToolbars[] = new WuiInnomaticToolBar('main', array('toolbars' => $gToolbars_array, 'toolbar' => 'true'));
         if (file_exists(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/php.log')) {
             $log_content = file_get_contents(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/log/php.log');
         }
@@ -739,7 +736,7 @@ function main_applications ($eventData)
                 $wui_applications_table[$data['category']]->addChild(new WuiLink('modauthorlabel' . $row, array('label' => $data['author'] , 'link' => $data['authorsite'])), $row, 2);
                 $wui_applications_table[$data['category']]->addChild(new WuiLabel('appversionlabel' . $row, array('label' => $data['appversion'])), $row, 3);
                 $wui_applications_table[$data['category']]->addChild(new WuiLabel('appdatedatelabel' . $row, array('label' => $data['appdate'])), $row, 4);
-                $wui_application_toolbar[$data['category']][$row] = new WuiToolBar('applicationtoolbar' . $row);
+                $wui_application_toolbar[$data['category']][$row] = new WuiHorizGroup('applicationtoolbar' . $row);
                 $details_action[$data['category']][$row] = new WuiEventsCall('applications');
                 $details_action[$data['category']][$row]->addEvent(new WuiEvent('view', 'details', array('appid' => $data['id'])));
                 $wui_details_button[$data['category']][$row] = new WuiButton('detailsbutton' . $row, array('label' => $gLocale->getStr('moddetails_label') , 'themeimage' => 'viewmag' , 'action' => $details_action[$data['category']][$row]->getEventsCallString() , 'horiz' => 'true'));
