@@ -144,13 +144,7 @@ function pass_setadvanced ($eventData)
             $innomatic_state_str = 'DEBUG';
             $innomatic_state = 'debug';
             $innomatic = InnomaticContainer::instance('innomaticcontainer');
-            $innomatic->setState(InnomaticContainer::STATE_DEVELOPMENT); // Do not set it to DEBUG
-            break;
-        case InnomaticContainer::STATE_DEVELOPMENT:
-            $innomatic_state_str = 'DEVELOPMENT';
-            $innomatic_state = 'development';
-            $innomatic = InnomaticContainer::instance('innomaticcontainer');
-            $innomatic->setState(InnomaticContainer::STATE_DEVELOPMENT);
+            $innomatic->setState(InnomaticContainer::STATE_PRODUCTION); // Do not set it to DEBUG
             break;
         case InnomaticContainer::STATE_PRODUCTION:
             $innomatic_state_str = 'PRODUCTION';
@@ -291,7 +285,6 @@ function main_default ($eventData)
             <vertgroup><name>state</name><args><width>100%</width></args><children>
               <label><name>state</name><args><label type="encoded">' . urlencode('<strong>' . $gLocale->getStr('state.label') . '</strong>') . '</label></args></label>
               <radio><name>innomaticstate</name><args><disp>action</disp><value>' . InnomaticContainer::STATE_PRODUCTION . '</value>' . ($state == InnomaticContainer::STATE_PRODUCTION ? '<checked>true</checked>' : '') . '<label type="encoded">' . urlencode($gLocale->getStr('production.radio')) . '</label></args></radio>
-              <radio><name>innomaticstate</name><args><disp>action</disp><value>' . InnomaticContainer::STATE_DEVELOPMENT . '</value>' . ($state == InnomaticContainer::STATE_DEVELOPMENT ? '<checked>true</checked>' : '') . '<label type="encoded">' . urlencode($gLocale->getStr('development.radio')) . '</label></args></radio>
               <radio><name>innomaticstate</name><args><disp>action</disp><value>' . InnomaticContainer::STATE_DEBUG . '</value>' . ($state == InnomaticContainer::STATE_DEBUG ? '<checked>true</checked>' : '') . '<label type="encoded">' . urlencode($gLocale->getStr('debug.radio')) . '</label></args></radio>
               <horizbar><name>hb</name></horizbar>
               <button><name>submit</name><args><themeimage>button_ok</themeimage><formsubmit>state</formsubmit><horiz>true</horiz><label>' . $gLocale->getStr('submit.button') . '</label><action type="encoded">' . urlencode(WuiEventsCall::buildEventsCallString('', array(array('view' , 'default' , '') , array('action' , 'setadvanced' , '')))) . '</action></args></button>
@@ -300,7 +293,7 @@ function main_default ($eventData)
         </children></vertgroup>';
     $innomatic = InnomaticContainer::instance('innomaticcontainer');
     if ($innomatic->getState() == InnomaticContainer::STATE_DEBUG) {
-        $innomatic->setState(InnomaticContainer::STATE_DEVELOPMENT);
+        $innomatic->setState(InnomaticContainer::STATE_PRODUCTION);
     }
     $gPage_content = new WuiXml('page', array('definition' => $xml_def));
 }
@@ -313,7 +306,7 @@ function main_processes ($eventData)
     global $gLocale, $gPage_content, $gToolbars;
     $innomatic = InnomaticContainer::instance('innomaticcontainer');
     if ($innomatic->getState() == InnomaticContainer::STATE_DEBUG)
-        $innomatic->setState(InnomaticContainer::STATE_DEVELOPMENT);
+        $innomatic->setState(InnomaticContainer::STATE_PRODUCTION);
     $headers[1]['label'] = $gLocale->getStr('pid.header');
     $headers[2]['label'] = $gLocale->getStr('creation.header');
     $xml_def = '<table><name>processes</name><args><headers type="array">' . WuiXml::encode($headers) . '</headers><rowsperpage>15</rowsperpage><pagesactionfunction>processes_list_action_builder</pagesactionfunction><pagenumber>' . ((is_array($eventData) and isset($eventData['processespage'])) ? $eventData['processespage'] : '') . '</pagenumber></args><children>';
@@ -410,7 +403,7 @@ function main_debug ($eventData)
     global $gLocale, $gPage_content;
     $innomatic = InnomaticContainer::instance('innomaticcontainer');
     if ($innomatic->getState() == InnomaticContainer::STATE_DEBUG) {
-        $innomatic->setState(InnomaticContainer::STATE_DEVELOPMENT);
+        $innomatic->setState(InnomaticContainer::STATE_PRODUCTION);
     }
     $debugger = new InnocoderInstanceDebugger($eventData['pid']);
     if ($debugger->CheckPidFile()) {

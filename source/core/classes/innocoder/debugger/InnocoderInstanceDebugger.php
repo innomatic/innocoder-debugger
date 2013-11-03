@@ -83,13 +83,9 @@ class InnocoderInstanceDebugger
                     $this->mLogEvents = array();
                     $this->mLibraries = array();
                     ////$this->mSessionId = $this->mPidStructure['gEnv']['runtime']['sessionid'];
-                    // TODO ['core']['state'] non esiste pi
                     switch ($this->mDump->innomatic['state']) {
                         case InnomaticContainer::STATE_SETUP:
                             $this->mState = 'SETUP';
-                            break;
-                        case InnomaticContainer::STATE_DEVELOPMENT:
-                            $this->mState = 'DEVELOPMENT';
                             break;
                         case InnomaticContainer::STATE_DEBUG:
                             $this->mState = 'DEBUG';
@@ -101,7 +97,7 @@ class InnocoderInstanceDebugger
                             $this->mState = 'UPGRADE';
                             break;
                     }
-                    // TODO ['core']['interface'] non esiste pi
+                    
                     switch ($this->mDump->innomatic['interface']) {
                         case InnomaticContainer::INTERFACE_UNKNOWN:
                             $this->mInterface = 'UNKNOWN';
@@ -121,7 +117,7 @@ class InnocoderInstanceDebugger
                         case InnomaticContainer::INTERFACE_EXTERNAL:
                             $this->mInterface = 'EXTERNAL';
                     }
-                    // TODO ['core']['mode'] non esiste pi
+
                     switch ($this->mDump->innomatic['mode']) {
                         case InnomaticContainer::MODE_ROOT:
                             $this->mMode = 'ROOT';
