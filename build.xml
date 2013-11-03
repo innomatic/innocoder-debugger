@@ -11,7 +11,7 @@
 <project name="Innocoder Debugger" basedir="source" default="package">
 
 	<property name="name" value="innocoder-debugger" />
-	<property name="version" value="1.0.1" />
+	<property name="version" value="1.1" />
 
 	<target name="sources">
 		<tar destfile="../build/${name}-src-${version}.tgz" compression="gzip">
