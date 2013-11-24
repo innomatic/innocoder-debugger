@@ -137,7 +137,7 @@ $gMain_disp->addEvent('applications', 'main_applications');
 $gMain_disp->addEvent('showapplication', 'main_showapplication');
 $gMain_disp->addEvent('applicationhooks', 'main_applicationhooks');
 $gMain_disp->Dispatch();
-$gWui->addChild(new WuiInnomaticPage('page', array('pagetitle' => $gPage_title , 'menu' => InnomaticContainer::getRootWuiMenuDefinition($innomatic->getLanguage()) , 'toolbars' => $gToolbars , 'maincontent' => $gPage_content , 'status' => $gPage_status , 'icon' => 'stack1')));
+$gWui->addChild(new WuiInnomaticPage('page', array('pagetitle' => $gPage_title , 'toolbars' => $gToolbars , 'maincontent' => $gPage_content , 'status' => $gPage_status , 'icon' => 'stack1')));
 $gWui->render();
 function pass_setadvanced ($eventData)
 {
