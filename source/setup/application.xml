@@ -12,7 +12,7 @@
 		<category>development</category>
 		<iconfile>application.png</iconfile>
 		<dependencies>
-			<dependency>innomatic[6.0]</dependency>
+			<dependency>innomatic[6.4.0]</dependency>
 		</dependencies>
 		<options>
 			<!-- <option></option> -->

@@ -850,7 +850,7 @@ function main_showapplication ($eventData)
     $query = InnomaticContainer::instance('innomaticcontainer')->getDataAccess()->execute('SELECT appid FROM applications WHERE id=' . $eventData['appid'] . ' ');
     $application_data = $query->getFields();
     require_once ('innomatic/application/ApplicationStructureDefinition.php');
-    $deffile = new ApplicationStructureDefinition(InnomaticContainer::instance('innomaticcontainer')->getDataAccess(), InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/');
+    $deffile = new ApplicationStructureDefinition(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/');
     $deffile->load_DefFile(InnomaticContainer::instance('innomaticcontainer')->getHome() . 'core/applications/' . $application_data['appid'] . '/application.xml');
     $structure = $deffile->getStructure();
     ksort($structure);
