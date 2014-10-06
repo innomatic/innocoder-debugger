@@ -8,13 +8,13 @@
 
   =======================================================================
 -->
-<project name="Innocoder Debugger" basedir="source" default="package">
+<project name="Innocoder Debugger" default="package">
 
 	<property name="name" value="innocoder-debugger" />
-	<property name="version" value="1.1.0" />
+	<property name="version" value="1.1.1" />
 
 	<target name="sources">
-		<tar destfile="../build/${name}-src-${version}.tgz" compression="gzip">
+        <tar destfile="{$basedir}/build/${name}-src-${version}.tgz" compression="gzip">
 			<tarfileset dir="." prefix="${name}-src-${version}">
 				<exclude name="**/.svn/**" />
 				<exclude name="project.index" />
@@ -25,20 +25,57 @@
 		</tar>
 	</target>
 
-	<target name="package">
-		<tar destfile="../build/${name}-${version}.tgz" compression="gzip">
-			<tarfileset dir="." prefix="${name}-${version}">
-				<exclude name="**/.cvsignore" />
-				<exclude name="**/.svn/**" />
+    <target name="init" depends="initdir">
+    </target>
+	
+	<target name="initdir">
+        <!-- Create the source directory -->
+        <mkdir dir="source" />
+
+        <!-- Create the different build directories -->
+        <mkdir dir="build" />
+	</target>
+
+	<target name="clean">
+		<!-- Remove old builds -->
+		<delete>
+			<fileset dir="${basedir}/build" includes="**.*" />
+		</delete>
+	</target>
+
+	<target name="package" depends="initdir,clean">
+		<tar destfile="${basedir}/build/${name}-${version}.tgz" compression="gzip">
+			<tarfileset dir="${basedir}/source" prefix="${name}">
 				<exclude name="build/**" />
-				<exclude name="nbproject/**" />
-				<exclude name="project.index" />
-				<exclude name=".project" />
-				<exclude name=".settings/**" />
-				<exclude name=".cache/**" />
 				<exclude name="build.xml" />
 			</tarfileset>
 		</tar>
+	</target>
+
+	 <!--
+    The default build target for this project. It simply depends on all sub tasks
+    that perform the project build. The sub targets are executed in the listed
+    order.
+    -->
+	<target name="build" depends="init,clean,package" />
+
+    <!--
+    Execute vagrant ssh-config to get the ssh configuration and rename it to innomatic-dev
+    -->
+	<target name="dev" depends="build">
+        <exec executable="scp">
+            <arg value="${basedir}/build/${name}-${version}.tgz" />
+            <arg value="innomatic-dev:/tmp/" />
+        </exec>
+
+        <exec executable="ssh">
+            <arg value="innomatic-dev" />
+            <arg value="-C" />
+            <arg value="php" />
+            <arg value="/vagrant/dev/innomatic/core/scripts/application.php" />
+            <arg value="deploy" />
+            <arg value="/tmp/${name}-${version}.tgz" />
+        </exec>
 	</target>
 
 </project>
