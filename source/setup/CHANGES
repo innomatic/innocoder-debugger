@@ -1,3 +1,13 @@
+1.1.1 - 2014/10/06
+------------------
+FIXES:
+- Fixed debug mode string for English localization. (Alex Pagnoni)
+
+NEW FEATURES:
+- Upgraded build file with local vagrant deploy target. (Alex Pagnoni)
+
+
+
 1.1.0 - 2014/10/06
 ------------------
 NEW FEATURES:
