@@ -12,10 +12,10 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Innomatic.
+ * The Original Code is Innocoder Debugger.
  *
  * The Initial Developer of the Original Code is Alex Pagnoni.
- * Portions created by the Initial Developer are Copyright (C) 2000-2009
+ * Portions created by the Initial Developer are Copyright (C) 2000-2014
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -97,7 +97,7 @@ class InnocoderInstanceDebugger
                             $this->mState = 'UPGRADE';
                             break;
                     }
-                    
+
                     switch ($this->mDump->innomatic['interface']) {
                         case InnomaticContainer::INTERFACE_UNKNOWN:
                             $this->mInterface = 'UNKNOWN';
@@ -211,7 +211,7 @@ class InnocoderInstanceDebugger
 			WHERE componentname LIKE ' . InnomaticContainer::instance('innomaticcontainer')->getDataAccess()->formatText('%' . $page) .
 			' AND applications_components_types.typename=' . InnomaticContainer::instance('innomaticcontainer')->getDataAccess()->formatText($this->mDump->innomatic['mode'] == InnomaticContainer::MODE_ROOT ? 'rootpanel' : 'domainpanel') .
 			' AND applications_components_types.id=applications_components_register.categoryid AND appname=applications.appid';
-			
+
             $guess_query = InnomaticContainer::instance('innomaticcontainer')->getDataAccess()->execute(
 				$guess_query_sql);
             if ($guess_query->getNumberRows()) {
@@ -219,13 +219,13 @@ class InnocoderInstanceDebugger
                 $bug_email = '';
                 if (strlen($guess_data['bugsemail']))
                     $bug_email = $guess_data['bugsemail'];
-                else 
+                else
                     if (strlen($guess_data['supportemail']))
                         $bug_email = $guess_data['supportemail'];
-                    else 
+                    else
                         if (strlen($guess_data['authoremail']))
                             $bug_email = $guess_data['authoremail'];
-                        else 
+                        else
                             if (strlen($guess_data['maintaineremail']))
                                 $bug_email = $guess_data['maintaineremail'];
                 $result = array();

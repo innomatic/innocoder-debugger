@@ -12,10 +12,10 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Innomatic.
+ * The Original Code is Innocoder Debugger.
  *
  * The Initial Developer of the Original Code is Alex Pagnoni.
- * Portions created by the Initial Developer are Copyright (C) 2000-2009
+ * Portions created by the Initial Developer are Copyright (C) 2000-2014
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -504,71 +504,71 @@ function main_debug ($eventData)
         $tabs[5]['label'] = $gLocale->getStr('bugreport.label');
         arsort($debugger->mDbProfiler);
         $xml_def = '<tab><name>debugger</name><args>' . (isset($eventData['activetab']) ? '<activetab>' . $eventData['activetab'] . '</activetab>' : '') . '<tabactionfunction>debugger_tab_action_builder</tabactionfunction><tabs type="array">' . WuiXml::encode($tabs) . '</tabs></args><children>
-                
+
                   <grid><name>debugger</name><children>
-                
+
                     <label row="' . $rowa ++ . '" col="0"><name>instance</name><args><label type="encoded">' . urlencode($gLocale->getStr('instance.label')) . '</label><bold>true</bold></args></label>
-                
+
                     <label row="' . $rowa . '" col="0"><name>pid</name><args><label type="encoded">' . urlencode($gLocale->getStr('pid.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>pid</name><args><readonly>true</readonly><value>' . $eventData['pid'] . '</value><size>32</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>sessionid</name><args><label type="encoded">' . urlencode($gLocale->getStr('sessionid.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>sessionid</name><args><readonly>true</readonly><value>' . $debugger->mSessionId . '</value><size>32</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>state</name><args><label type="encoded">' . urlencode($gLocale->getStr('state.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>state</name><args><readonly>true</readonly><value>' . $debugger->mState . '</value><size>15</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>interface</name><args><label type="encoded">' . urlencode($gLocale->getStr('interface.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>interface</name><args><readonly>true</readonly><value>' . $debugger->mInterface . '</value><size>15</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>mode</name><args><label type="encoded">' . urlencode($gLocale->getStr('mode.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>mode</name><args><readonly>true</readonly><value>' . $debugger->mMode . '</value><size>15</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>pagename</name><args><label type="encoded">' . urlencode($gLocale->getStr('pagename.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>pagename</name><args><readonly>true</readonly><value>' . $debugger->mDesktopApplication . '</value><size>20</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>domainid</name><args><label type="encoded">' . urlencode($gLocale->getStr('domainid.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>domainid</name><args><readonly>true</readonly><value>' . $debugger->mPidStructure['gEnv']['domain']['id'] . '</value><size>20</size></args></string>
-                
+
                     <label row="' . $rowa . '" col="0"><name>userid</name><args><label type="encoded">' . urlencode($gLocale->getStr('userid.label')) . '</label></args></label>
                     <string row="' . $rowa ++ . '" col="1"><name>userid</name><args><readonly>true</readonly><value>' . $debugger->mPidStructure['gEnv']['user']['id'] . '</value><size>20</size></args></string>
-                
+
                   </children></grid>
-                
+
                   <grid><name>environment</name><children>
-                
+
                     <label row="' . $rowb ++ . '" col="0"><name>environment</name><args><label type="encoded">' . urlencode($gLocale->getStr('environment.label')) . '</label><bold>true</bold></args></label>
-                
+
                     <label row="' . $rowb . '" col="0"><name>memory</name><args><label type="encoded">' . urlencode($gLocale->getStr('memorylimit.label')) . '</label></args></label>
                     <string row="' . $rowb ++ . '" col="1"><name>memory</name><args><readonly>true</readonly><value>' . $debugger->mPidStructure['gEnv']['core']['php']['memorylimit'] . '</value><size>15</size></args></string>
-                
+
                     <label row="' . $rowb . '" col="0"><name>timelimit</name><args><label type="encoded">' . urlencode($gLocale->getStr('timelimit.label')) . '</label></args></label>
                     <string row="' . $rowb ++ . '" col="1"><name>timelimit</name><args><readonly>true</readonly><value>' . $debugger->mPidStructure['gEnv']['core']['php']['timelimit'] . '</value><size>15</size></args></string>
-                
+
                     <label row="' . $rowb . '" col="0"><name>sessionlifetime</name><args><label type="encoded">' . urlencode($gLocale->getStr('sessionlifetime.label')) . '</label></args></label>
                     <string row="' . $rowb ++ . '" col="1"><name>sessionlifetime</name><args><readonly>true</readonly><value>' . $debugger->mPidStructure['gEnv']['core']['session']['lifetime'] . '</value><size>15</size></args></string>
-                
+
                     <label row="' . $rowb . '" col="0"><name>extensions</name><args><label type="encoded">' . urlencode($gLocale->getStr('extensions.label')) . '</label></args></label>
                     <listbox row="' . $rowb ++ . '" col="1"><name>extensions</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mLoadedExtensions) . '</elements><size>10</size></args></listbox>
-                
+
                   </children></grid>
-                
+
                   <grid><name>runtime</name><children>
-                
+
                     <label row="' . $rowc ++ . '" col="0"><name>runtime</name><args><label type="encoded">' . urlencode($gLocale->getStr('runtime.label')) . '</label><bold>true</bold></args></label>
-                                
+
                     <label row="' . $rowc . '" col="0"><name>logevents</name><args><label type="encoded">' . urlencode($gLocale->getStr('logevents.label')) . '</label></args></label>
                     <text row="' . $rowc ++ . '" col="1"><name>logevents</name><args><readonly>true</readonly><value type="encoded">' . urlencode($log_events) . '</value><rows>15</rows><cols>100</cols></args></text>
-                
+
                     <label row="' . $rowc . '" col="0"><name>calledhooks</name><args><label type="encoded">' . urlencode($gLocale->getStr('calledhooks.label')) . '</label></args></label>
                     <listbox row="' . $rowc ++ . '" col="1"><name>calledhooks</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mCalledHooks) . '</elements><size>5</size></args></listbox>
-                
+
                     <label row="' . $rowc . '" col="0"><name>wuievents</name><args><label type="encoded">' . urlencode($gLocale->getStr('wuievents.label')) . '</label></args></label>
                     <listbox row="' . $rowc ++ . '" col="1"><name>wuievents</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($wui_events) . '</elements><size>5</size></args></listbox>
-                
+
                     <label row="' . $rowc . '" col="0"><name>queries</name><args><label type="encoded">' . urlencode($gLocale->getStr('queries.label')) . '</label></args></label>
                     <listbox row="' . $rowc ++ . '" col="1"><name>queries</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mExecutedQueries) . '</elements><size>10</size></args></listbox>
-                
+
                     <label row="' . $rowc . '" col="0"><name>includedfiles</name><args><label type="encoded">' . urlencode($gLocale->getStr('includedfiles.label')) . '</label></args></label>
                     <listbox row="' . $rowc ++ . '" col="1"><name>includedfiles</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mIncludedFiles) . '</elements><size>5</size></args></listbox>
                     <label row="' . $rowc . '" col="0">
@@ -583,7 +583,7 @@ function main_debug ($eventData)
                         <size>15</size>
                       </args>
                     </string>
-                
+
                     <label row="' . $rowc . '" col="0">
                               <args>
                                 <label type="encoded">' . urlencode($gLocale->getStr('memorypeakusage.label')) . '</label>
@@ -596,50 +596,50 @@ function main_debug ($eventData)
                         <size>15</size>
                       </args>
                     </string>
-                
+
                     </children></grid>
-                
+
                   <grid><name>source</name><children>
-                
+
                     <label row="' . $rowe ++ . '" col="0"><name>source</name><args><label type="encoded">' . urlencode($gLocale->getStr('source.label')) . '</label><bold>true</bold></args></label>
-                
+
                     <label row="' . $rowe . '" col="0"><name>classes</name><args><label type="encoded">' . urlencode($gLocale->getStr('classes.label')) . '</label></args></label>
                     <listbox row="' . $rowe ++ . '" col="1"><name>classes</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mDefinedClasses) . '</elements><size>10</size></args></listbox>
-                
+
                     <label row="' . $rowe . '" col="0"><name>functions</name><args><label type="encoded">' . urlencode($gLocale->getStr('functions.label')) . '</label></args></label>
                     <listbox row="' . $rowe ++ . '" col="1"><name>functions</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mDefinedFunctions) . '</elements><size>5</size></args></listbox>
-                
+
                   </children></grid>
-                
+
                   <grid><name>profiler</name><children>
-                
+
                     <label row="' . $rowd ++ . '" col="0"><name>profiler</name><args><label type="encoded">' . urlencode($gLocale->getStr('profiler.label')) . '</label><bold>true</bold></args></label>
-                
+
                     <label row="' . $rowd . '" col="0"><name>markers</name><args><label type="encoded">' . urlencode($gLocale->getStr('markers.label')) . '</label></args></label>
                     <listbox row="' . $rowd ++ . '" col="1"><name>markers</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mProfiler) . '</elements><size>20</size></args></listbox>
-                
+
                     <label row="' . $rowd . '" col="0"><name>markers</name><args><label type="encoded">' . urlencode($gLocale->getStr('dbmarkers.label')) . '</label></args></label>
                     <listbox row="' . $rowd ++ . '" col="1"><name>markers</name><args><readonly>true</readonly><elements type="array">' . WuiXml::encode($debugger->mDbProfiler) . '</elements><size>20</size></args></listbox>
-                    
+
                     <label row="' . $rowd . '" col="0"><name>dbload</name><args><label type="encoded">' . urlencode($gLocale->getStr('dbload.label')) . '</label></args></label>
                     <string row="' . $rowd ++ . '" col="1"><name>dbload</name><args><readonly>true</readonly><value>' . $debugger->mDbTotalLoad . '</value><size>20</size></args></string>
-                
+
                     <label row="' . $rowd . '" col="0"><args><label type="encoded">' . urlencode($gLocale->getStr('executedqueries.label')) . '</label></args></label>
                     <string row="' . $rowd ++ . '" col="1"><name>executedqueries</name><args><readonly>true</readonly><value>' . count($debugger->mDbProfiler) . '</value><size>6</size></args></string>
-                
+
                   </children></grid>
-                
+
                   <form><name>bugreport</name><args><method>post</method><action type="encoded"></action></args><children>
-                
+
                     <vertgroup><name>bugreport</name><children>
-                
+
                       <grid><name>bugreport</name><children>
-                
+
                         <label row="' . $rowf ++ . '" col="0"><name>bugreport</name><args><label type="encoded">' . urlencode($gLocale->getStr('bugreport.label')) . '</label><bold>true</bold></args></label>
-                
+
                         <label row="' . $rowf . '" col="0"><name>application</name><args><label type="encoded">' . urlencode($gLocale->getStr('application.label')) . '</label></args></label>
                         <label row="' . $rowf ++ . '" col="1"><name>application</name><args><label type="encoded">' . urlencode($appdata['application']) . '</label></args></label>
-                
+
                         <label row="' . $rowf . '" col="0"><name>bugsemail</name><args><label type="encoded">' . urlencode($gLocale->getStr('bugsemail.label')) . '</label></args></label>
                         <label row="' . $rowf ++ . '" col="1"><name>to</name><args><label type="encoded">' . urlencode($appdata['email']) . '</label></args></label>';
         if ($appdata['innomaticemail'] != $appdata['email'])
@@ -647,14 +647,14 @@ function main_debug ($eventData)
                                 <checkbox row="' . $rowf ++ . '" col="1"><name>notify</name><args><disp>action</disp></args></checkbox>';
         $xml_def .= '        <label row="' . $rowf . '" col="0"><name>email</name><args><label type="encoded">' . urlencode($gLocale->getStr('submitteremail.label')) . '</label></args></label>
                         <string row="' . $rowf ++ . '" col="1"><name>email</name><args><size>25</size><disp>action</disp></args></string>
-                
+
                         <label row="' . $rowf . '" col="0"><name>message</name><args><label type="encoded">' . urlencode($gLocale->getStr('message.label')) . '</label></args></label>
                         <text row="' . $rowf ++ . '" col="1"><name>message</name><args><cols>80</cols><rows>10</rows><disp>action</disp></args></text>
-                
+
                       </children></grid>
-                
+
                       <horizbar><name>hb</name></horizbar>
-                
+
                       <button><name>submit</name>
                         <args>
                           <formsubmit>bugreport</formsubmit>
@@ -665,11 +665,11 @@ function main_debug ($eventData)
                           <action type="encoded">' . urlencode(WuiEventsCall::buildEventsCallString('', array(array('view' , 'debug' , array('pid' => $eventData['pid'])) , array('action' , 'submitbugreport' , array('pid' => $eventData['pid']))))) . '</action>
                         </args>
                       </button>
-                
+
                     </children></vertgroup>
-                
+
                   </children></form>
-                
+
                 </children></tab>';
     }
     $gPage_content = new WuiXml('page', array('definition' => $xml_def));
@@ -893,17 +893,17 @@ function main_applicationhooks ($eventData)
         <align>top</align>
       </args>
       <children>
-    
+
         <vertgroup>
           <children>
-    
+
             <label>
               <args>
                 <label>' . WuiXml::cdata($gLocale->getStr('hook_events.label')) . '</label>
                 <bold>true</bold>
               </args>
             </label>
-    
+
       <table>
       <name>hookevents</name>
       <args>
@@ -933,14 +933,14 @@ function main_applicationhooks ($eventData)
         </vertgroup>
         <vertgroup>
           <children>
-    
+
             <label>
               <args>
                 <label>' . WuiXml::cdata($gLocale->getStr('hooks.label')) . '</label>
                 <bold>true</bold>
               </args>
             </label>
-    
+
       <table>
       <name>hooks</name>
       <args>
