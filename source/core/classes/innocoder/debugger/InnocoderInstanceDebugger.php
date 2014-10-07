@@ -36,7 +36,7 @@ class InnocoderInstanceDebugger
     public $mCalledHooks = array();
     public $mWuiEvents = array();
     public $mExecutedQueries = array();
-    public $mSessionId = array();
+    public $mSessionId;
     public $mState;
     public $mInterface;
     public $mMode;
@@ -82,7 +82,8 @@ class InnocoderInstanceDebugger
                     $this->mProfiler = array();
                     $this->mLogEvents = array();
                     $this->mLibraries = array();
-                    ////$this->mSessionId = $this->mPidStructure['gEnv']['runtime']['sessionid'];
+                    $this->mSessionId = $this->mDump->sessionId;
+
                     switch ($this->mDump->innomatic['state']) {
                         case InnomaticContainer::STATE_SETUP:
                             $this->mState = 'SETUP';
@@ -182,14 +183,14 @@ class InnocoderInstanceDebugger
                     if (is_array($this->mDump->environment['declared_classes'])) {
                         $this->mDefinedClasses = $this->mDump->environment['declared_classes'];
                     }
-                    if (is_array($this->mDump->environment['defined_funtions'])) {
+                    if (is_array($this->mDump->environment['defined_functions'])) {
                         $this->mDefinedFunctions = $this->mDump->environment['defined_functions'];
                     }
                     if (is_array($this->mDump->environment['loaded_extensions'])) {
-                        $this->mLoadedExtensions = $this->$this->mDump->environment['loaded_extensions'];
+                        $this->mLoadedExtensions = $this->mDump->environment['loaded_extensions'];
                     }
                     if (is_array($this->mDump->environment['included_files'])) {
-                        $this->mIncludedFiles = $$this->mDump->environment['included_files'];
+                        $this->mIncludedFiles = $this->mDump->environment['included_files'];
                     }
                     $this->mDesktopApplication = $this->mDump->desktopApplication;
                     $result = $this->mRead = true;
