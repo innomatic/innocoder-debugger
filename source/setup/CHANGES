@@ -1,3 +1,14 @@
+1.1.2 - 2014/10/07
+------------------
+FIXES:
+- Fixed fatal error. (Alex Pagnoni)
+- Fixed typo in defined functions. (Alex Pagnoni)
+
+CHANGES:
+- Updated session id information. (Alex Pagnoni)
+
+
+
 1.1.1 - 2014/10/06
 ------------------
 FIXES:
